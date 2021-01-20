@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #third-party
+    # third-party
     'rest_framework',
     'corsheaders',
+
+    # local
+    'accounts',
+    'server',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +70,7 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000',
+    'http://localhost:3000',
 )
 
 ROOT_URLCONF = 'server.urls'
@@ -138,3 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'server.utils.my_jwt_response_handler'
+}
