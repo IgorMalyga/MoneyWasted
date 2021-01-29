@@ -1,2 +1,2 @@
-CREATE USER moneywasted WITH SUPERUSER PASSWORD 'moneywasted';
-CREATE DATABASE moneywasted WITH OWNER moneywasted;
+CREATE USER money_wasted WITH SUPERUSER PASSWORD 'money_wasted';
+CREATE DATABASE money_wasted WITH OWNER money_wasted;
