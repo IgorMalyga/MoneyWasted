@@ -1,0 +1,68 @@
+div.landing {
+  background-color: brown;
+  height: 100vh;
+  background: url('../../landing-background.jpg');
+  background-size: cover;
+}
+
+.centered-card {
+  background: rgba(255, 255, 255, 0.5) !important;
+  width: 20%;
+  height: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* border: 1px solid black !important; */
+  padding: 10px;
+  border-radius: 10px !important;
+  -webkit-box-shadow: -1px 1px 1px 1px rgba(0, 0, 0, 0.75) !important;
+  -moz-box-shadow: -1px 1px 1px 1px rgba(0, 0, 0, 0.75) !important;
+  box-shadow: -1px 1px 3px 3px rgba(0, 0, 0, 0.75) !important;
+}
+
+.sign-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #2282be 0%,
+    #26a0da 51%,
+    #2282be 100%
+  );
+}
+.btn-grad {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.login-form {
+  flex-direction: column;
+  justify-content: baseline;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.centered-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
