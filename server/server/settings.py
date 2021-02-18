@@ -149,3 +149,5 @@ STATIC_URL = '/static/'
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'server.utils.my_jwt_response_handler'
 }
+
+AUTH_USER_MODEL = "accounts.User"
