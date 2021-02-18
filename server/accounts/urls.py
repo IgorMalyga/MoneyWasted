@@ -6,6 +6,6 @@ from .views import current_user, UserList
 
 urlpatterns = [
     path('token-auth/', obtain_jwt_token),
-    path('current_user/', current_user),
+    path('current-user/', current_user),
     path('users/', UserList.as_view())
 ]
