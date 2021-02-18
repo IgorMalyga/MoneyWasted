@@ -2,15 +2,14 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useFormik } from 'formik';
 
-const SigninForm = () => {
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
+const SigninForm = (props) => {
   const formik = useFormik({
     initialValues: {
       email: '',
+      password: '',
     },
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: ({ email, password }) => {
+      props.handleLogin(email, password);
     },
   });
   return (
@@ -22,14 +21,21 @@ const SigninForm = () => {
         >
           Sign In
         </div>
-        {/* <span>Sign In</span> */}
-        <TextField id="outlined-basic" label="Email" variant="outlined" />
         <TextField
-          id="outlined-password-input"
+          id="email"
+          label="Email"
+          variant="outlined"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+        <TextField
+          id="password"
           label="Password"
           type="password"
           autoComplete="current-password"
           variant="outlined"
+          onChange={formik.handleChange}
+          value={formik.values.password}
         />
 
         <button type="submit" className="btn-grad">

@@ -1,16 +1,28 @@
 import React from 'react';
-// import Card from '@material-ui/core/Card';
 
 import SigninForm from '../../components/Forms/SignIn';
-
+import axiosWrapp from '../../utils';
 import './styles.css';
 
-const Landing = () => (
-  <div className="landing">
-    <div className="centered-card">
-      <SigninForm />
+const Landing = () => {
+  const handleLogin = (email, password) => {
+    console.log(email, password);
+    axiosWrapp
+      .post('accounts/token-auth/', {
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+  return (
+    <div className="landing">
+      <div className="centered-card">
+        <SigninForm handleLogin={handleLogin} />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Landing;
