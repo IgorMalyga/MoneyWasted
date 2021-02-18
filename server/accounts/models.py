@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='profile')
     current_money = models.FloatField(default=0)
     payday_date = models.DateField(blank=True, null=True)
 
