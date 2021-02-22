@@ -2,13 +2,14 @@ import React from 'react';
 
 import SigninForm from '../../components/Forms/SignIn';
 import axiosWrapp from '../../utils';
+import { LOGIN } from '../../constants';
 import './styles.css';
 
 const Landing = () => {
   const handleLogin = (email, password) => {
     console.log(email, password);
     axiosWrapp
-      .post('accounts/token-auth/', {
+      .post(LOGIN, {
         email,
         password,
       })
