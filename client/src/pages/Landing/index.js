@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SigninForm from '../../components/Forms/SignIn';
-import axiosWrapp from '../../utils';
+import { axiosWrapp, setTokenInCookies } from '../../utils';
 import { LOGIN } from '../../constants';
 import './styles.css';
 
@@ -14,7 +14,7 @@ const Landing = () => {
         password,
       })
       .then((response) => {
-        console.log(response);
+        setTokenInCookies(response.data.token);
       });
   };
   return (
