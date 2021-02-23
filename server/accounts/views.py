@@ -1,11 +1,21 @@
-from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
 from rest_framework import permissions, status
+from django.http.response import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_jwt.views import ObtainJSONWebToken
 
 from .serializers import UserSerializer, UserSignUp
+
+
+class SignIn(ObtainJSONWebToken):
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if response.status_code == 400:
+            print('A'*50, flush=True)
+            return HttpResponse({'status': 400, 'error': response.data['non_field_errors'][0]})
+
+        return response
 
 
 @api_view(['GET'])

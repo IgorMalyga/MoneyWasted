@@ -14,7 +14,10 @@ const Landing = () => {
         password,
       })
       .then((response) => {
-        setTokenInCookies(response.data.token);
+        console.log(response);
+        if (response.status === 200) {
+          setTokenInCookies(response.data.token);
+        }
       });
   };
   return (
