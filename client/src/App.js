@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Landing from './pages/Landing';
-import { Dashboard } from './pages/dashboard';
+import Dashboard from './pages/dashboard';
 
 import * as routes from './constants/routes';
 import './App.css';
