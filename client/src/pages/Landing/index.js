@@ -1,22 +1,23 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import SigninForm from '../../components/Forms/SignIn';
 import { axiosWrapp, setTokenInCookies } from '../../utils';
 import { LOGIN } from '../../constants';
+import { DASHBOARD } from '../../constants/routes';
 import './styles.css';
 
-const Landing = () => {
+const Landing = ({ history }) => {
   const handleLogin = (email, password) => {
-    console.log(email, password);
     axiosWrapp
       .post(LOGIN, {
         email,
         password,
       })
       .then((response) => {
-        console.log(response);
-        if (response.status === 200) {
+        if (response.data.token) {
           setTokenInCookies(response.data.token);
+          history.push(DASHBOARD);
         }
       });
   };
@@ -29,4 +30,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default withRouter(Landing);
