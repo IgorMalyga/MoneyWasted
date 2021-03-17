@@ -1,32 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { getTokenFromCookies, axiosWrapp } from '../utils';
 import { VERIFY_TOKEN } from '../constants';
 import { LANDING } from '../constants/routes';
 
-export const withAuth = (WrappedComponent) => () => {
+export const withAuth = (WrappedComponent) => withRouter((props) => {
   const [loggedIn, setLoggedIn] = useState(false);
-  useEffect(() => {
+
+  const verifyToken = async () => {
     const token = getTokenFromCookies();
     if (token) {
-      axiosWrapp
-        .post(VERIFY_TOKEN, {
+      try {
+        const response = await axiosWrapp.post(VERIFY_TOKEN, {
           token,
-        })
-        .then((response) => {
-          if (response.user) {
-            setLoggedIn(true);
-          }
         });
+        if (response.data.token) {
+          setLoggedIn(true);
+        } else {
+          setLoggedIn(false);
+        }
+      } catch {
+        props.history.push(LANDING);
+      }
     } else {
       setLoggedIn(false);
+      props.history.push(LANDING);
     }
+  };
+
+  useEffect(() => {
+    verifyToken();
   }, []);
 
-  return loggedIn ? (
-    <WrappedComponent hello="hello" />
-  ) : (
-    <Redirect to={LANDING} />
-  );
-};
+  if (loggedIn) {
+    return <WrappedComponent hello="hello" />;
+  }
+  return null;
+});
