@@ -21,7 +21,7 @@ const SignupForm = (props) => {
       password2: '',
     },
     onSubmit: ({ email, password1, password2 }) => {
-      props.handleRegister(email, password1, password2);
+      props.handleSignUp(email, password1, password2);
     },
   });
 
@@ -48,7 +48,7 @@ const SignupForm = (props) => {
           autoComplete="current-password"
           variant="outlined"
           onChange={formik.handleChange}
-          value={formik.values.password}
+          value={formik.values.password1}
         />
         <TextField
           id="password2"
@@ -57,7 +57,7 @@ const SignupForm = (props) => {
           autoComplete="current-password"
           variant="outlined"
           onChange={formik.handleChange}
-          value={formik.values.password}
+          value={formik.values.password2}
         />
         <span>
           Already have account?

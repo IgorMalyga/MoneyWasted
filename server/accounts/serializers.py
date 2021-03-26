@@ -12,12 +12,22 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer()
+    profile = ProfileSerializer(required=False)
 
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name',
                   'last_name', 'email', 'profile']
+
+    def validate(self, data):
+        if self.initial_data['password1'] == self.initial_data['password2']:
+            data['password'] = self.initial_data['password1']
+            return data
+        else:
+            raise serializers.ValidationError("Password didn't match")
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
 
 
 class UserSignUp(serializers.ModelSerializer):

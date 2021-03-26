@@ -4,18 +4,32 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_jwt.views import ObtainJSONWebToken
+from rest_framework import generics
+from rest_framework.mixins import CreateModelMixin
+
 
 from .serializers import UserSerializer, UserSignUp
+from .models import User
 
 
 class SignIn(ObtainJSONWebToken):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
         if response.status_code == 400:
-            print('A'*50, flush=True)
             return HttpResponse({'status': 400, 'error': response.data['non_field_errors'][0]})
 
         return response
+
+
+class SignUp(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = []
+
+    def perform_create(self, serializer):
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data)
 
 
 @api_view(['GET'])

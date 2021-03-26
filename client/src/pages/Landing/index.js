@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import SigninForm from '../../components/Forms/SignIn';
 import SignupForm from '../../components/Forms/SignUp';
 import { axiosWrapp, setTokenInCookies } from '../../utils';
-import { LOGIN } from '../../constants';
+import { LOGIN, SIGNUP } from '../../constants';
 import { DASHBOARD } from '../../constants/routes';
 import './styles.css';
 
@@ -29,11 +29,29 @@ const Landing = ({ history }) => {
     setSignUp(value);
   };
 
+  const handleSignUp = async (email, password1, password2) => {
+    axiosWrapp
+      .post(SIGNUP, { email, password1, password2 })
+      .catch((error) => {
+        console.log(error.response);
+      })
+      .then((response) => {
+        if (response.status === 201) {
+          handleSetSignUp(false);
+        } else {
+          console.log('Oops, something went wrong :('); // TODO add handling for another response status codes
+        }
+      });
+  };
+
   return (
     <div className="landing">
       <div className="centered-card">
         {signUp ? (
-          <SignupForm handleSetSignUp={handleSetSignUp} />
+          <SignupForm
+            handleSetSignUp={handleSetSignUp}
+            handleSignUp={handleSignUp}
+          />
         ) : (
           <SigninForm
             handleLogin={handleLogin}
