@@ -6,21 +6,22 @@ import { useFormik } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-  signUp: {
+  signIn: {
     color: 'blue',
     cursor: 'pointer',
   },
 }));
 
-const SigninForm = (props) => {
+const SignupForm = (props) => {
   const classes = useStyles();
   const formik = useFormik({
     initialValues: {
       email: '',
-      password: '',
+      password1: '',
+      password2: '',
     },
-    onSubmit: ({ email, password }) => {
-      props.handleLogin(email, password);
+    onSubmit: ({ email, password1, password2 }) => {
+      props.handleRegister(email, password1, password2);
     },
   });
 
@@ -41,7 +42,16 @@ const SigninForm = (props) => {
           value={formik.values.email}
         />
         <TextField
-          id="password"
+          id="password1"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          variant="outlined"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+        />
+        <TextField
+          id="password2"
           label="Password"
           type="password"
           autoComplete="current-password"
@@ -50,13 +60,13 @@ const SigninForm = (props) => {
           value={formik.values.password}
         />
         <span>
-          Don`t have account?
+          Already have account?
           {' '}
           <span
-            onClick={() => props.handleSetSignUp(true)}
-            className={classes.signUp}
+            onClick={() => props.handleSetSignUp(false)}
+            className={classes.signIn}
           >
-            Sign up!
+            Sign in!
           </span>
         </span>
         <button type="submit" className="btn-grad">
@@ -67,4 +77,4 @@ const SigninForm = (props) => {
   );
 };
 
-export default SigninForm;
+export default SignupForm;
