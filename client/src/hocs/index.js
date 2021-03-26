@@ -34,7 +34,8 @@ export const withAuth = (WrappedComponent) => withRouter((props) => {
   }, []);
 
   if (loggedIn) {
-    return <WrappedComponent hello="hello" />;
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    return <WrappedComponent {...props} />;
   }
   return null;
 });

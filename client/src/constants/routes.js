@@ -1,2 +1,2 @@
-export const LANDING = '/';
+export const LANDING = '/login';
 export const DASHBOARD = '/dashboard';
