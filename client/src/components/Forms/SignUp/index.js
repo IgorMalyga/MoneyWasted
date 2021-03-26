@@ -32,7 +32,7 @@ const SignupForm = (props) => {
           className="centered-div"
           style={{ fontSize: '30px', fontFamily: 'Sans-serif' }}
         >
-          Sign In
+          Sign Up
         </div>
         <TextField
           id="email"
