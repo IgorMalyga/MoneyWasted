@@ -2,22 +2,13 @@ from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from .models import User
 
-from .models import Profile
-
-
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = '__all__'
-
 
 class UserSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(required=False)
 
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name',
-                  'last_name', 'email', 'profile']
+                  'last_name', 'email']
 
     def validate(self, data):
         if self.initial_data['password1'] == self.initial_data['password2']:
