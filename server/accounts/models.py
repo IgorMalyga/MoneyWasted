@@ -51,6 +51,7 @@ class Profile(models.Model):
         User, on_delete=models.CASCADE, related_name='profile')
     current_money = models.FloatField(default=0)
     payday_date = models.DateField(blank=True, null=True)
+    avatar = models.ImageField(null=True, upload_to='avatars')
 
     USERNAME_FIELD = 'email'
 
