@@ -22,6 +22,8 @@ class Wallet(models.Model):
         'accounts.User', on_delete=models.CASCADE, related_name='wallets')
     current_money = models.FloatField(default=0)
     payday_date = models.DateField(blank=True, null=True)
+    currency = models.ForeignKey(
+        'expenses.Currency', null=True, on_delete=models.PROTECT, related_name='+')
 
     @property
     def days_to_payday_left(self):
