@@ -13,6 +13,10 @@ const useStyles = makeStyles(() => ({
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
   },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
 }));
 
 const Header = () => {
@@ -20,9 +24,8 @@ const Header = () => {
   const classes = useStyles();
   return useObserver(() => (
     <AppBar position="fixed" className={classes.appBar}>
-      <Toolbar>
+      <Toolbar className={classes.toolbar}>
         <Typography variant="h6" noWrap>
-          Permanent drawer
           {store.user ? store.user.email : ''}
         </Typography>
       </Toolbar>
