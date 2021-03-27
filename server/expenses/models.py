@@ -1,6 +1,17 @@
 import datetime
 
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
+
+
+class Currency(models.Model):
+    name = models.CharField(max_length=255)
+    code = models.CharField(max_length=8)
+    countries = ArrayField(models.CharField(
+        max_length=255, blank=True), size=8)
+
+    def __str__(self):
+        return '%d %s' % (self.id, self.name)
 
 
 class Wallet(models.Model):
