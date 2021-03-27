@@ -3,9 +3,11 @@ import { withRouter } from 'react-router-dom';
 
 import { getTokenFromCookies, axiosWrapp } from '../utils';
 import { VERIFY_TOKEN } from '../constants';
+import { StoreContext } from '../storage';
 import { LANDING } from '../constants/routes';
 
 export const withAuth = (WrappedComponent) => withRouter((props) => {
+  const store = React.useContext(StoreContext);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const verifyToken = async () => {
@@ -17,6 +19,9 @@ export const withAuth = (WrappedComponent) => withRouter((props) => {
         });
         if (response.data.token) {
           setLoggedIn(true);
+          if (!store.user) {
+            store.addUser(response.data.user);
+          }
         } else {
           setLoggedIn(false);
         }

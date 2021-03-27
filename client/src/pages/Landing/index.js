@@ -6,9 +6,11 @@ import SignupForm from '../../components/Forms/SignUp';
 import { axiosWrapp, setTokenInCookies } from '../../utils';
 import { LOGIN, SIGNUP } from '../../constants';
 import { DASHBOARD } from '../../constants/routes';
+import { StoreContext } from '../../storage';
 import './styles.css';
 
 const Landing = ({ history }) => {
+  const store = React.useContext(StoreContext);
   const [signUp, setSignUp] = useState(false);
 
   const handleLogin = (email, password) => {
@@ -19,6 +21,7 @@ const Landing = ({ history }) => {
       })
       .then((response) => {
         if (response.data.token) {
+          store.addUser(response.data.user);
           setTokenInCookies(response.data.token);
           history.push(DASHBOARD);
         }
