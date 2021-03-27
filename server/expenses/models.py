@@ -10,6 +10,9 @@ class Currency(models.Model):
     countries = ArrayField(models.CharField(
         max_length=255, blank=True), size=8)
 
+    class Meta:
+        verbose_name_plural = "Currencies"
+
     def __str__(self):
         return '%d %s' % (self.id, self.name)
 
