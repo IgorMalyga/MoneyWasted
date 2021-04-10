@@ -18,6 +18,7 @@ class Currency(models.Model):
 
 
 class Wallet(models.Model):
+    name = models.CharField(max_length=255, default="Main")
     user = models.ForeignKey(
         'accounts.User', on_delete=models.CASCADE, related_name='wallets')
     current_money = models.FloatField(default=0)
