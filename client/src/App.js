@@ -5,6 +5,7 @@ import { useLocalStore } from 'mobx-react';
 
 import Landing from './pages/Landing';
 import Dashboard from './pages/dashboard';
+import CreateWallet from './pages/wallet/createWallet';
 import Main from './Main';
 import { StoreContext } from './storage';
 import * as routes from './constants/routes';
@@ -30,6 +31,7 @@ const App = (props) => (
       </Route>
       <Main {...props}>
         <Route path={routes.DASHBOARD} component={Dashboard} />
+        <Route path={routes.CREATE_WALLET} component={CreateWallet} />
       </Main>
     </Switch>
   </StoreProvider>

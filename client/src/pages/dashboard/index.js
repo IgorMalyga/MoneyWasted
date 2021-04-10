@@ -4,6 +4,7 @@ import { axiosWrapp } from '../../utils';
 import { withAuth } from '../../hocs';
 
 import { WALLETS } from '../../constants/index';
+import { CREATE_WALLET } from '../../constants/routes';
 
 /* eslint-disable */
 const Dashboard = (props) => {
@@ -33,7 +34,18 @@ const Dashboard = (props) => {
           })}
         </div>
       ) : (
-        <h1>You have not wallets yet :(</h1>
+        <div>
+          {' '}
+          <h1>You have not wallets yet :(</h1>
+          <h1
+            onClick={() => {
+              console.log(props);
+              props.history.push(CREATE_WALLET);
+            }}
+          >
+            Create new wallet
+          </h1>
+        </div>
       )}
     </>
   );
