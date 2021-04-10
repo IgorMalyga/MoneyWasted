@@ -1,20 +1,31 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Header from './components/Header';
 import SideBar from './components/SideBar';
 
 import { withAuth } from './hocs/index';
 
-const Main = ({ children, props }) => (
-  <div className="flexible-content" style={{ height: '100%' }}>
-    <div className="main-container" style={{ height: '100%' }}>
-      <main id="content" className="p-3" style={{ height: '100%' }}>
-        <Header props={props} />
-        <SideBar props={props} />
+const useStyles = makeStyles(() => ({
+  content: {
+    height: '100vh',
+    width: 'calc(100% - 240px)',
+    marginLeft: '240px',
+    marginTop: '5%',
+  },
+}));
+
+const Main = ({ children, props }) => {
+  const classes = useStyles();
+  return (
+    <div style={{ height: '100vh' }}>
+      <Header props={props} />
+      <SideBar props={props} />
+      <main id="content" className={classes.content} style={{ height: '100%' }}>
         {children}
       </main>
     </div>
-  </div>
-);
+  );
+};
 
 export default withAuth(Main);
