@@ -4,8 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+
+import Item from './sidebarItem';
+import * as path from '../../constants/routes';
+
+const SIDEBAR_ITEMS = [
+  { label: 'Dashboard', icon: DashboardIcon, link: path.DASHBOARD },
+];
 
 const drawerWidth = 240;
 
@@ -41,20 +47,23 @@ const SideBar = () => {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text) => (
+          {SIDEBAR_ITEMS.map((item) => (
+            <Item {...item} />
+          ))}
+          {/* {['Dashboard', 'Expenses', 'Income'].map((text) => (
             <ListItem button key={text}>
               <ListItemText primary={text} />
             </ListItem>
-          ))}
+          ))} */}
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text) => (
+        {/* <List>
+          {['Settings', 'Logout'].map((text) => (
             <ListItem button key={text}>
               <ListItemText primary={text} />
             </ListItem>
           ))}
-        </List>
+        </List> */}
       </Drawer>
     </>
   );
