@@ -14,7 +14,7 @@ export const withAuth = (WrappedComponent) => withRouter((props) => {
     const token = getTokenFromCookies();
     if (token) {
       try {
-        const response = await axiosWrapp.post(VERIFY_TOKEN, {
+        const response = await axiosWrapp().post(VERIFY_TOKEN, {
           token,
         });
         if (response.data.token) {

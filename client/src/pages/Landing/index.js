@@ -14,7 +14,7 @@ const Landing = ({ history }) => {
   const [signUp, setSignUp] = useState(false);
 
   const handleLogin = (email, password) => {
-    axiosWrapp
+    axiosWrapp()
       .post(LOGIN, {
         email,
         password,

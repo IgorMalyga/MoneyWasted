@@ -12,7 +12,10 @@ export const getTokenFromCookies = () => {
   return token;
 };
 
-export const axiosWrapp = axios.create({
+export const axiosWrapp = () => axios.create({
   baseURL: BASE_BACKEND_URL,
   responseType: 'json',
+  headers: {
+    Authorization: `JWT ${getTokenFromCookies()}`,
+  },
 });
