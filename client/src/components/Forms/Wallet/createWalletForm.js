@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -17,16 +17,17 @@ const CURRENCIES = [
 ];
 const CreateWalletForm = () => {
   console.log('CREATE WALLET111 FORM');
+  const [selectedCurrency, setSelectedCurrency] = useState('');
   const formik = useFormik({
     initialValues: {
-      email: '',
+      name: '',
       currentMoney: '',
       paydayDate: '',
     },
-    onSubmit: ({ email, password1, password2 }) => {
+    onSubmit: ({ name, currentMoney }) => {
       // props.handleSignUp(email, password1, password2);
       // add request to create wallet
-      console.log(email, password1, password2);
+      console.log(name, currentMoney, selectedCurrency);
     },
   });
   return (
@@ -52,13 +53,28 @@ const CreateWalletForm = () => {
         value={formik.values.currentMoney}
       />
       <Autocomplete
-        id="combo-box-demo"
+        id="currency"
         options={CURRENCIES}
         getOptionLabel={(option) => option.code}
         style={{ width: 300 }}
-        renderInput={(params) => (
-          <TextField {...params} label="Combo box" variant="outlined" />
-        )}
+        onChange={(event, value) => {
+          setSelectedCurrency(value.code);
+        }}
+        renderInput={(params) => {
+          console.log('aaaa', formik.values.currency);
+          return (
+            <TextField
+              {...params}
+              label="Combo box"
+              variant="outlined"
+              value={selectedCurrency}
+              // onChange={(e) => {
+              //   console.log(222222, e.target.value);
+              //   formik.handleChange(e);
+              // }}
+            />
+          );
+        }}
       />
       <TextField
         id="paydayDate"
