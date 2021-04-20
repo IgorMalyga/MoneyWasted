@@ -4,8 +4,9 @@ import CreateWalletForm from '../../components/Forms/Wallet/createWalletForm';
 import { withAuth } from '../../hocs';
 import { axiosWrapp } from '../../utils';
 import { WALLETS, CURRENCIES } from '../../constants/index';
+import { DASHBOARD } from '../../constants/routes';
 
-const CreateWallet = () => {
+const CreateWallet = ({ history }) => {
   const [currencies, setCurrencies] = useState(null);
   useEffect(() => {
     axiosWrapp()
@@ -24,6 +25,7 @@ const CreateWallet = () => {
       })
       .then((response) => {
         console.log(response);
+        history.push(DASHBOARD);
       });
   };
   return (
