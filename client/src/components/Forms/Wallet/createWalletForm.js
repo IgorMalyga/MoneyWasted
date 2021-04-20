@@ -58,7 +58,6 @@ const CreateWalletForm = ({ handleCreateWallet, currencies }) => {
         id="paydayDate"
         label="paydayDate"
         type="date"
-        defaultValue={new Date()}
         onChange={formik.handleChange}
         value={formik.values.paydayDate}
         InputLabelProps={{
