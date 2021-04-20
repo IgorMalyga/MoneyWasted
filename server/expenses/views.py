@@ -4,7 +4,7 @@ from .models import Currency, Wallet
 from .serializers import WalletSerializer, CurrencySerializer
 
 
-class WalletsList(generics.ListAPIView):
+class WalletsList(generics.CreateAPIView, generics.ListAPIView):
     serializer_class = WalletSerializer
 
     def get_queryset(self):

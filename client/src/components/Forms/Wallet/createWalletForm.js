@@ -3,31 +3,20 @@ import { useFormik } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-// import { makeStyles } from '@material-ui/core/styles';
-
-// const useStyles = makeStyles(() => ({
-//   signIn: {
-//     color: 'blue',
-//     cursor: 'pointer',
-//   },
-// }));
 const CURRENCIES = [
   { id: 1, code: 'UAH' },
   { id: 2, code: 'USD' },
 ];
-const CreateWalletForm = () => {
-  console.log('CREATE WALLET111 FORM');
+const CreateWalletForm = ({ handleCreateWallet }) => {
   const [selectedCurrency, setSelectedCurrency] = useState('');
   const formik = useFormik({
     initialValues: {
       name: '',
-      currentMoney: '',
+      current_money: '',
       paydayDate: '',
     },
-    onSubmit: ({ name, currentMoney }) => {
-      // props.handleSignUp(email, password1, password2);
-      // add request to create wallet
-      console.log(name, currentMoney, selectedCurrency);
+    onSubmit: ({ name, currentMoney, paydayDate }) => {
+      handleCreateWallet({ name, currentMoney, selectedCurrency, paydayDate });
     },
   });
   return (
@@ -58,7 +47,7 @@ const CreateWalletForm = () => {
         getOptionLabel={(option) => option.code}
         style={{ width: 300 }}
         onChange={(event, value) => {
-          setSelectedCurrency(value.code);
+          setSelectedCurrency(value.id);
         }}
         renderInput={(params) => {
           console.log('aaaa', formik.values.currency);
@@ -68,10 +57,6 @@ const CreateWalletForm = () => {
               label="Combo box"
               variant="outlined"
               value={selectedCurrency}
-              // onChange={(e) => {
-              //   console.log(222222, e.target.value);
-              //   formik.handleChange(e);
-              // }}
             />
           );
         }}
@@ -81,6 +66,8 @@ const CreateWalletForm = () => {
         label="paydayDate"
         type="date"
         defaultValue={new Date()}
+        onChange={formik.handleChange}
+        value={formik.values.paydayDate}
         InputLabelProps={{
           shrink: true,
         }}
