@@ -17,6 +17,18 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'flex-end',
   },
+  navbarItem: {
+    '&::after': {
+      content: "''",
+      width: '0',
+      height: '100%',
+      border: '1px solid white',
+      top: '0',
+      left: '0',
+      marginLeft: '5px',
+      marginRight: '5px',
+    },
+  },
 }));
 
 const Header = () => {
@@ -25,6 +37,9 @@ const Header = () => {
   return useObserver(() => (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
+        <Typography variant="h6" noWrap className={classes.navbarItem}>
+          {store.user ? store.user.active_wallet.name : ''}
+        </Typography>
         <Typography variant="h6" noWrap>
           {store.user ? store.user.email : ''}
         </Typography>

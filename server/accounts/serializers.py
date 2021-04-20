@@ -1,14 +1,17 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
+
+from expenses.serializers import WalletSerializer
 from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    active_wallet = WalletSerializer(source='get_active_wallet')
 
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name',
-                  'last_name', 'email']
+                  'last_name', 'email', 'active_wallet']
 
     def validate(self, data):
         if self.initial_data['password1'] == self.initial_data['password2']:

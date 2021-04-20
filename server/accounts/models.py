@@ -46,3 +46,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
+
+    @property
+    def get_active_wallet(self):
+        return self.wallets.filter(is_active=True).first()
