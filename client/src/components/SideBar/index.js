@@ -10,7 +10,7 @@ import Item from './sidebarItem';
 import * as path from '../../constants/routes';
 
 const SIDEBAR_ITEMS = [
-  { label: 'Dashboard', icon: DashboardIcon, link: path.DASHBOARD },
+  { id: 1, label: 'Dashboard', icon: DashboardIcon, link: path.DASHBOARD },
 ];
 
 const drawerWidth = 240;
@@ -48,22 +48,10 @@ const SideBar = () => {
         <Divider />
         <List>
           {SIDEBAR_ITEMS.map((item) => (
-            <Item {...item} />
+            <Item key={item.id} {...item} />
           ))}
-          {/* {['Dashboard', 'Expenses', 'Income'].map((text) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))} */}
         </List>
         <Divider />
-        {/* <List>
-          {['Settings', 'Logout'].map((text) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
       </Drawer>
     </>
   );

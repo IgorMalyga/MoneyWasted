@@ -1,7 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useLocalStore } from 'mobx-react';
+import { useLocalObservable } from 'mobx-react';
 
 import Landing from './pages/Landing';
 import Dashboard from './pages/dashboard';
@@ -12,7 +11,7 @@ import * as routes from './constants/routes';
 import './App.css';
 
 const StoreProvider = ({ children }) => {
-  const store = useLocalStore(() => ({
+  const store = useLocalObservable(() => ({
     user: undefined,
     addUser: (user) => {
       store.user = user;

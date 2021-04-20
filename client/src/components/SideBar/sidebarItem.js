@@ -13,11 +13,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Item = ({ label, link, icon }) => {
+const Item = ({ id, label, link, icon }) => {
   const classes = useStyles();
   const Icon = icon;
   return (
-    <Link href={link} className={classes.link}>
+    <Link key={id} href={link} className={classes.link}>
       <ListItem button key={label}>
         <Icon />
         <ListItemText primary={label} className={classes.text} />

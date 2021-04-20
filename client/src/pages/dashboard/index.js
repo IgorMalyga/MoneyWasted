@@ -18,7 +18,6 @@ const Dashboard = (props) => {
         setErrors(error.response);
       })
       .then((response) => {
-        console.log(response);
         if (response.data.length) {
           setWallets(response.data);
         }
@@ -30,7 +29,7 @@ const Dashboard = (props) => {
       {wallets ? (
         <div>
           {wallets.map((wallet) => {
-            return <span>{wallet.currency}</span>;
+            return <p key={wallet.id}>{wallet.name}</p>;
           })}
         </div>
       ) : (
@@ -39,7 +38,6 @@ const Dashboard = (props) => {
           <h1>You have not wallets yet :(</h1>
           <h1
             onClick={() => {
-              console.log(props);
               props.history.push(CREATE_WALLET);
             }}
           >

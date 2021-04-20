@@ -49,17 +49,14 @@ const CreateWalletForm = ({ handleCreateWallet }) => {
         onChange={(event, value) => {
           setSelectedCurrency(value.id);
         }}
-        renderInput={(params) => {
-          console.log('aaaa', formik.values.currency);
-          return (
-            <TextField
-              {...params}
-              label="Combo box"
-              variant="outlined"
-              value={selectedCurrency}
-            />
-          );
-        }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Combo box"
+            variant="outlined"
+            value={selectedCurrency}
+          />
+        )}
       />
       <TextField
         id="paydayDate"
