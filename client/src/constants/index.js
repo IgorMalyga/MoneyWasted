@@ -8,3 +8,4 @@ export const SIGNUP = 'accounts/signup/';
 // expenses related endpoints
 
 export const WALLETS = 'expenses/wallets/';
+export const CURRENCIES = 'expenses/currencies/';

@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import CreateWalletForm from '../../components/Forms/Wallet/createWalletForm';
 import { withAuth } from '../../hocs';
 import { axiosWrapp } from '../../utils';
-import { WALLETS } from '../../constants/index';
+import { WALLETS, CURRENCIES } from '../../constants/index';
 
 const CreateWallet = () => {
+  const [currencies, setCurrencies] = useState(null);
+  useEffect(() => {
+    axiosWrapp()
+      .get(CURRENCIES)
+      .then((response) => {
+        setCurrencies(response.data);
+      });
+  }, []);
   const handleCreateWallet = (data) => {
     axiosWrapp()
       .post(WALLETS, {
@@ -18,7 +26,12 @@ const CreateWallet = () => {
         console.log(response);
       });
   };
-  return <CreateWalletForm handleCreateWallet={handleCreateWallet} />;
+  return (
+    <CreateWalletForm
+      handleCreateWallet={handleCreateWallet}
+      currencies={currencies}
+    />
+  );
 };
 
 export default withAuth(CreateWallet);

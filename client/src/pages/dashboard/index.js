@@ -31,6 +31,13 @@ const Dashboard = (props) => {
           {wallets.map((wallet) => {
             return <p key={wallet.id}>{wallet.name}</p>;
           })}
+          <h1
+            onClick={() => {
+              props.history.push(CREATE_WALLET);
+            }}
+          >
+            Create new wallet
+          </h1>
         </div>
       ) : (
         <div>

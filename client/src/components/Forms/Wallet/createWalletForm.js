@@ -3,11 +3,7 @@ import { useFormik } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const CURRENCIES = [
-  { id: 1, code: 'UAH' },
-  { id: 2, code: 'USD' },
-];
-const CreateWalletForm = ({ handleCreateWallet }) => {
+const CreateWalletForm = ({ handleCreateWallet, currencies }) => {
   const [selectedCurrency, setSelectedCurrency] = useState('');
   const formik = useFormik({
     initialValues: {
@@ -43,7 +39,7 @@ const CreateWalletForm = ({ handleCreateWallet }) => {
       />
       <Autocomplete
         id="currency"
-        options={CURRENCIES}
+        options={currencies}
         getOptionLabel={(option) => option.code}
         style={{ width: 300 }}
         onChange={(event, value) => {
