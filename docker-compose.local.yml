@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: money_wasted
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: 'app.settings.local'
+      DATABASE_URL: 'postgres://root:root@db:5432/money_wasted'
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
